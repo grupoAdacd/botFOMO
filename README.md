@@ -1,1 +1,1 @@
-# botFOMO
+# BitFOMO
