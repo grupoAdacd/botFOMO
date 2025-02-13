@@ -1,3 +1,5 @@
+package APIs;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -6,7 +8,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 public class NytAPI {
-    private static final String API_KEY = "ZhkyIwT4ekIfpWU3BWVQgAvfiEJgijc5"; // Replace with your API key
+    private static final String API_KEY = "ZhkyIwT4ekIfpWU3BWVQgAvfiEJgijc5";
     private static final String BASE_URL = "https://api.nytimes.com/svc/news/v3/content/all/all.json";
 
     public static void main(String[] args) throws Exception {
@@ -20,9 +22,7 @@ public class NytAPI {
 
         System.out.println("Raw JSON Response from NYT API:");
         System.out.println(responseBody);
-        System.out.println("""
-                *----- Processed Articles Info -----*"
-                """);
+        System.out.println("\n*----- Processed Articles Info -----*\n");
 
         JSONObject jsonResponse = new JSONObject(responseBody);
         JSONArray articles = jsonResponse.getJSONArray("results");
@@ -39,7 +39,7 @@ public class NytAPI {
             String title = articleJson.getString("title");
             String abstractArticle = articleJson.getString("abstract");
             String articleText = title + " " + abstractArticle;
-            String author = articleJson.getString("byline"); // Get author (byline)
+            String author = articleJson.getString("byline");
             String articleUrl = articleJson.getString("url");
 
             String theme = determineTheme(articleText, bitcoinKeywords);
