@@ -35,10 +35,7 @@ public class RedditAPI {
             JSONArray posts = redditAPI.fetchRedditPosts(subredditName);
 
             if (posts != null && posts.length() > 0) {
-                System.out.println("""
-                                
-                                Latest Reddit Posts:
-                          """);
+                System.out.println("\nLatest Reddit Posts: \n");
                 for (int i = 0; i < Math.min(5, posts.length()); i++) {
                     JSONObject post = posts.getJSONObject(i);
                     String title = post.getJSONObject("data").getString("title");
@@ -48,10 +45,8 @@ public class RedditAPI {
                     System.out.println("   - Title: " + title);
                     System.out.println("     Author: " + author);
                     System.out.println("     Link: " + postLink);
-                    System.out.println("""
-                            
-                            *---------------------------------*
-                            """);
+                    System.out.println("\n*---------------------------------*\n");
+
                 }
             } else {
                 System.out.println("  Could not retrieve Reddit posts for r/" + subredditName + " or no posts found.");

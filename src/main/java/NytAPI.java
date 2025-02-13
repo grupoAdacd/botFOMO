@@ -5,7 +5,7 @@ import java.net.http.HttpResponse;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-public class NYTapi {
+public class NytAPI {
     private static final String API_KEY = "ZhkyIwT4ekIfpWU3BWVQgAvfiEJgijc5"; // Replace with your API key
     private static final String BASE_URL = "https://api.nytimes.com/svc/news/v3/content/all/all.json";
 
@@ -46,14 +46,11 @@ public class NYTapi {
             String sentiment = analyzeSentiment(articleText, proBitcoinKeywords, counterBitcoinKeywords);
 
             System.out.println("Article Title: " + title);
-            System.out.println("Author: " + author); // Print author
-            System.out.println("Article Link: " + articleUrl); // Print article link
+            System.out.println("Author: " + author);
+            System.out.println("Article Link: " + articleUrl);
             System.out.println("Theme: " + theme);
             System.out.println("Sentiment: " + sentiment);
-            System.out.println("""
-             
-             *-------------------------------------------*
-             """);
+            System.out.println("\n*-------------------------------------------*\n");
         }
     }
 
@@ -70,32 +67,30 @@ public class NYTapi {
     private static String analyzeSentiment(String articleText, String[] proKeywords, String[] counterKeywords) {
         articleText = articleText.toLowerCase();
 
-        boolean foundKeyword = false; // Flag to track if any keyword is found
+        boolean foundKeyword = false;
 
-        // Check for ANY pro keywords
         for (String keyword : proKeywords) {
             if (articleText.contains(keyword)) {
                 foundKeyword = true;
-                break; // No need to check further if one pro keyword is found
+                break;
             }
         }
         if (foundKeyword) {
-            return "Bitcoin-related Sentiment"; // Return sentiment if pro keyword found
+            return "Bitcoin-related Sentiment";
         }
 
-        // Check for ANY counter keywords if pro keywords not found
         if (!foundKeyword) {
             for (String keyword : counterKeywords) {
                 if (articleText.contains(keyword)) {
                     foundKeyword = true;
-                    break; // No need to check further if one counter keyword is found
+                    break;
                 }
             }
         }
         if (foundKeyword) {
-            return "Bitcoin-related Sentiment"; // Return sentiment if counter keyword found
+            return "Bitcoin-related Sentiment";
         }
 
-        return "Neutral Sentiment"; // Return "Neutral Sentiment" if NEITHER pro nor counter keywords are found
+        return "Neutral Sentiment";
     }
 }
